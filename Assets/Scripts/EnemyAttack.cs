@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    float damage = 25.0f;
+    public float damage = 25.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -14,11 +14,6 @@ public class EnemyAttack : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        
-    }
-
-    void OnTriggerEnter(Collider other)
     {
         
     }
