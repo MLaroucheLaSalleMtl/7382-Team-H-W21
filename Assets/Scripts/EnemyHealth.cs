@@ -4,35 +4,39 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public float enemyMaxHP = 100.0f;
-    public float enemyCurrentHP;
-    int damage = 10;
+    public float maxHP;
+    public float currentHP;
+    public GameObject HPBar;
 
     // Start is called before the first frame update
     void Start()
     {
-        enemyCurrentHP = enemyMaxHP;
+        currentHP = maxHP;
     }
 
-    void OnCollisionEnter(Collision collision)
+    public void deductHP(float DeductHP)
     {
-        if (collision.gameObject.tag == "Player")
+        maxHP -= DeductHP;
+        if (maxHP <= 0)
         {
-            enemyCurrentHP -= damage;
+            enemyDead();
         }
     }
 
     public void enemyDead()
     {
-        if (enemyCurrentHP <= 0)
-        {
-            gameObject.SetActive(false);
-        }
+        Destroy(gameObject);
     }
 
-    void Update()
+    void decreaseHP()
     {
-        enemyDead();
+        float damagedHP = currentHP / maxHP;
+        setHPBar(damagedHP);
+    }
+
+    public void setHPBar(float enemyHP)
+    {
+        HPBar.transform.localScale = new Vector3(enemyHP, HPBar.transform.localScale.y, HPBar.transform.localScale.z);
     }
 
 }

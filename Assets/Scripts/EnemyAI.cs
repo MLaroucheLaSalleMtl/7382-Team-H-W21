@@ -7,7 +7,7 @@ public class EnemyAI : MonoBehaviour
 {
     private NavMeshAgent enemy;
     public GameObject player;
-    public float EnemyDistanceRun = 1000.0f;
+    public float EnemyDistanceRun;
 
     // Start is called before the first frame update
     void Start()
