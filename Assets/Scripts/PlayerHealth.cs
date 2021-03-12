@@ -4,19 +4,36 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float maxHP;
-    public float currentHP;
-
+    
+    public float playerMaxHP = 100.0f;
+    public float playerCurrentHP;
+    int damage = 5;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        currentHP = maxHP;
+        playerCurrentHP = playerMaxHP;
     }
 
-    // Update is called once per frame
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            playerCurrentHP -= damage;
+        }
+    }
+
+    public void playerDead()
+    {
+        if (playerCurrentHP <= 0)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
     void Update()
     {
-        
+        playerDead();
     }
 }
