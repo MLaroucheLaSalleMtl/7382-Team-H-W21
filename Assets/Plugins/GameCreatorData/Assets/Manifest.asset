@@ -34,6 +34,32 @@ MonoBehaviour:
       - Assets/Plugins/GameCreator/Melee/
       dataPaths: []
   - module:
+      moduleID: com.gamecreator.examples.melee
+      version:
+        major: 0
+        minor: 1
+        patch: 5
+      displayName: Melee Examples
+      description: Example scenes that show how to use the Melee module
+      category: Examples
+      dependencies:
+      - moduleID: com.gamecreator.module.melee
+        version:
+          major: 0
+          minor: 1
+          patch: 5
+      tags:
+      - examples
+      - melee
+      authorName: Marti-Joan Nogue Coll
+      authorMail: marti@catsoft-studios.com
+      authorSite: https://gamecreator.io
+      includesData: 0
+      codePaths:
+      - Assets/Plugins/GameCreator/MeleeExamples/
+      dataPaths:
+      - Assets/Plugins/GameCreatorData/Melee/
+  - module:
       moduleID: com.gamecreator.module.stats
       version:
         major: 1
@@ -52,3 +78,29 @@ MonoBehaviour:
       codePaths:
       - Assets/Plugins/GameCreator/Stats/
       dataPaths: []
+  - module:
+      moduleID: com.gamecreator.examples.melee
+      version:
+        major: 0
+        minor: 1
+        patch: 5
+      displayName: Melee Examples
+      description: Example scenes that show how to use the Melee module
+      category: Examples
+      dependencies:
+      - moduleID: com.gamecreator.module.melee
+        version:
+          major: 0
+          minor: 1
+          patch: 5
+      tags:
+      - examples
+      - melee
+      authorName: Marti-Joan Nogue Coll
+      authorMail: marti@catsoft-studios.com
+      authorSite: https://gamecreator.io
+      includesData: 0
+      codePaths:
+      - Assets/Plugins/GameCreator/MeleeExamples/
+      dataPaths:
+      - Assets/Plugins/GameCreatorData/Melee/

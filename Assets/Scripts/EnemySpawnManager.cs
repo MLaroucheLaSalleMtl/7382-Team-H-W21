@@ -5,6 +5,11 @@ using UnityEngine;
 public class EnemySpawnManager : MonoBehaviour
 {
     public GameObject enemy;
+    public Transform[] spawnPoints;
+
+    public float enemyMaxHP = 200.0f;
+    public float enemyCurrentHP;
+
     public int x;
     public int z;
     public int enemyCount;
@@ -12,10 +17,15 @@ public class EnemySpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(enemyDrop());
+        enemyCurrentHP = enemyMaxHP;
     }
 
-    IEnumerator enemyDrop()
+    public void callEnemySpawn()
+    {
+        StartCoroutine(enemySpawn());
+    }
+
+    IEnumerator enemySpawn()
     {
         while (enemyCount < 10)
         {
@@ -26,6 +36,8 @@ public class EnemySpawnManager : MonoBehaviour
             enemyCount += 1;
         }
     }
+    //find a best spawn point and instantiate the enemy there
+    
 
     // Update is called once per frame
     void Update()

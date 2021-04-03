@@ -1,30 +1,47 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
 public class EnemyAI : MonoBehaviour
 {
-    private NavMeshAgent enemy;
-    public GameObject player;
-    public float EnemyDistanceRun = 1000.0f;
-
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// Make Enemy AI to chase the Player
+    /// </summary>
+    
+    public Transform target; //destination
+    private NavMeshAgent nav;
+    private Animator anim;
+    
+    private void Awake()
     {
-        enemy = GetComponent<NavMeshAgent>();
+        nav = GetComponent<NavMeshAgent>();
+    }
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float distance = Vector3.Distance(transform.position, player.transform.position);
-
-        if (distance < EnemyDistanceRun)
+        float distance = Vector3.Distance(transform.position, target.position);
+        
+        if (distance > 1.5)
         {
-            Vector3 dirToPlayer = transform.position - player.transform.position;
-            Vector3 newPosition = transform.position - dirToPlayer;
-            enemy.SetDestination(newPosition);
+            nav.updatePosition = true;
+            nav.SetDestination(target.position);
+            //anim.SetBool("Run", true);
+            anim.SetBool("Attack1", false);
+        }
+        else
+        {
+            nav.updatePosition = false;
+            //anim.SetBool("Run", false);
+            anim.SetBool("Attack1", true);
         }
     }
+
+    
 }

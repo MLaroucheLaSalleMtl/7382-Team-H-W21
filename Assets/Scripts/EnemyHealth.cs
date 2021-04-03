@@ -4,35 +4,58 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public float enemyMaxHP = 100.0f;
-    public float enemyCurrentHP;
-    int damage = 5;
+    private float EnemyMaxHP = 200;
+    public float EnemyCurHP;
+    private float EnemyMinHP = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        enemyCurrentHP = enemyMaxHP;
+        EnemyCurHP = EnemyMaxHP;
     }
 
-    void OnCollisionEnter(Collision collision)
+    // Update is called once per frame
+    void Update()
     {
-        if (collision.gameObject.tag == "Player")
+        
+    }
+
+
+   // If the Player hits the enemy, enemy gets damage.
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "PlayerWeapon")
         {
-            enemyCurrentHP -= damage;
+            EnemyCurHP -= 10;
+            MinHealth();
         }
     }
 
-    public void enemyDead()
+    public void MaxHealth()
     {
-        if (enemyCurrentHP <= 0)
+        if (EnemyCurHP > EnemyMaxHP)
+        {
+            EnemyCurHP = EnemyMaxHP;
+
+        }
+    }
+
+    private void MinHealth()
+    {
+        if (EnemyCurHP < EnemyMinHP)
+        {
+            EnemyCurHP = EnemyMinHP;
+        }
+    }
+
+    private void playerDead()
+    {
+        if (EnemyCurHP <= 0)
         {
             gameObject.SetActive(false);
         }
-    }
 
-    void Update()
-    {
-        enemyDead();
+
     }
 
 }
