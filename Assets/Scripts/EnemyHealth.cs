@@ -6,7 +6,7 @@ public class EnemyHealth : MonoBehaviour
 {
     private float EnemyMaxHP = 200;
     public float EnemyCurHP;
-    private float EnemyMinHP = 0;
+    private float EnemyMinHP = 0; 
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +36,6 @@ public class EnemyHealth : MonoBehaviour
         if (EnemyCurHP > EnemyMaxHP)
         {
             EnemyCurHP = EnemyMaxHP;
-
         }
     }
 
@@ -47,15 +46,4 @@ public class EnemyHealth : MonoBehaviour
             EnemyCurHP = EnemyMinHP;
         }
     }
-
-    private void playerDead()
-    {
-        if (EnemyCurHP <= 0)
-        {
-            gameObject.SetActive(false);
-        }
-
-
-    }
-
 }

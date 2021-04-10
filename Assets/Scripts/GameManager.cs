@@ -4,51 +4,66 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager instance;
     public EnemySpawnManager enemySpawnManager;
-
-    public bool enemyDied;
-
-    public int enemyMaxHP = 100;
-    public int enemyCurrentHP = 0;
-    public int enemiesLeft = 0;
+    public EnemyHealth enemyHealth;
+    public PlayerHealth playerHealth;
+    
+    public float surviveTime = 0.0f;
     public int enemiesKilled = 0;
-    public float SurvivalTime = 0.0f;
+    public int spawnedEnemies;
+
+    public static GameManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = GameObject.FindObjectOfType<GameManager>();
+            }
+            return instance;
+        }
+    }
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 
     void Start()
     {
-        enemyCurrentHP = enemyMaxHP;
-        enemySpawnManager.callEnemySpawn();
+        enemySpawnManager.enemySpawn();
     }
-
-    public void enemyDie()
-    {
-        if (enemyCurrentHP <= 0)
-        {
-            gameObject.SetActive(false);
-        }
-    }
-
-    public void enemyKilled()
-    {
-        if (enemyDied == true)
-        {
-            enemyDie();
-            enemiesKilled += 1;
-        }
-
-    }
-    public void enemyLeft()
-    {
-        if (enemyDied == true)
-        {
-            
-        }
-    }
-    public void survivalTime() { }
-    public void loadLevels() { }
 
     void Update()
     {
-        
+        enemyDie();
+        playerDie();
     }
+
+    public bool enemyDie()
+    {
+        if (enemyHealth.EnemyCurHP <= 0)
+        {
+            enemiesKilled += 1;
+            gameObject.SetActive(false);
+            enemySpawnManager.enemySpawn();
+        }
+        return true;
+    }
+
+    public bool playerDie()
+    {
+        if (playerHealth.PlayerCurHP <= 0)
+        {
+            gameObject.SetActive(false);
+        }
+        return true;
+    }
+
+    public void survivalTime() 
+    { 
+
+    }
+
 }

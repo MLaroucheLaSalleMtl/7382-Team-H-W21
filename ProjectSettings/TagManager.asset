@@ -9,6 +9,7 @@ TagManager:
   - Combat
   - EnemyWeapon
   - PlayerWeapon
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

@@ -4,43 +4,39 @@ using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
 {
-    public GameObject enemy;
-    public Transform[] spawnPoints;
+    [SerializeField]public GameObject enemyPrefab;
+    [SerializeField]public GameObject[] spawnPoints;
+    public Player player;
 
-    public float enemyMaxHP = 200.0f;
-    public float enemyCurrentHP;
+    public EnemyHealth enemyHealth;
 
-    public int x;
-    public int z;
-    public int enemyCount;
+    public Vector3 spawnLocation;
+
+    private void Awake()
+    {
+        spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        enemyCurrentHP = enemyMaxHP;
+        player = GameObject.FindGameObjectWithTag("PlayerWeapon").GetComponent<Player>();
+        enemyPrefab = (GameObject)Resources.Load("Enemy", typeof(GameObject));
+        spawnLocation = enemyPrefab.transform.position;
+        enemySpawn();
     }
 
-    public void callEnemySpawn()
+    public void enemySpawn()
     {
-        StartCoroutine(enemySpawn());
-    }
+        int spawn = Random.Range(0, spawnPoints.Length);
 
-    IEnumerator enemySpawn()
-    {
-        while (enemyCount < 10)
-        {
-            x = Random.Range(511, 517);
-            z = Random.Range(446, 452);
-            Instantiate(enemy, new Vector3(x, 65, z), Quaternion.identity);
-            yield return new WaitForSeconds(0.1f);
-            enemyCount += 1;
-        }
+        if (player.positionRaycast(spawnPoints[0]))
+            Debug.Log("Wall found");
+        GameObject.Instantiate(enemyPrefab, spawnPoints[spawn].transform.position, transform.rotation);   
     }
-    //find a best spawn point and instantiate the enemy there
-    
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
     }

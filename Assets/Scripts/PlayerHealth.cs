@@ -10,29 +10,13 @@ public class PlayerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         PlayerCurHP = PlayerMaxHP;
     }
 
     // Update is called once per frame
     void Update()   
     {
-        //Testing: I Press Z the player take damage by 10
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            PlayerCurHP -= 10;
-            MinHealth();
-        }
-
-        //Testing: If Press X the player is restored 30 HP
-        //if (Input.GetKeyDown(KeyCode.X))
-        //{
-        //    PlayerCurHP += 30;
-        //    MaxHealth();
-        //}
-
-
-
+       
     }
 
     //If the player is detected by Enemy's Weapon get 10 damage
@@ -40,11 +24,10 @@ public class PlayerHealth : MonoBehaviour
     {
         if (other.tag == "EnemyWeapon")
         {
-            PlayerCurHP -= 10;
+            PlayerCurHP -= 30;
             MinHealth();
         }
     }
-
 
     //If the player get potion restore 30HP
     public void PotionHP()
@@ -53,13 +36,11 @@ public class PlayerHealth : MonoBehaviour
         MaxHealth();
     }
 
-
     public void MaxHealth()
     {
         if (PlayerCurHP > PlayerMaxHP)
         {
             PlayerCurHP = PlayerMaxHP;
-
         }
     }
 
@@ -69,15 +50,5 @@ public class PlayerHealth : MonoBehaviour
         {
             PlayerCurHP = PlayerMinHP;
         }
-    }
-
-    private void playerDead()
-    {
-        if (PlayerCurHP <= 0)
-        {
-            gameObject.SetActive(false);
-        }
-
-
     }
 }
