@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class EnemyHealth : MonoBehaviour
 {
+    
     private float EnemyMaxHP = 200;
     public float EnemyCurHP;
-    private float EnemyMinHP = 0; 
+    private float EnemyMinHP = 0;    
+    public Image EnemyHPSlider;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +23,9 @@ public class EnemyHealth : MonoBehaviour
     void Update()
     {
         
+        EnemyHPSlider.fillAmount = EnemyCurHP / 200f;
+
+       
     }
 
 
@@ -26,9 +34,10 @@ public class EnemyHealth : MonoBehaviour
     {
         if (other.tag == "PlayerWeapon")
         {
-            EnemyCurHP -= 10;
+            EnemyCurHP -= 20;
             MinHealth();
         }
+
     }
 
     public void MaxHealth()
@@ -46,4 +55,7 @@ public class EnemyHealth : MonoBehaviour
             EnemyCurHP = EnemyMinHP;
         }
     }
+
+
+
 }

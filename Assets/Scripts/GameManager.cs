@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,9 +9,10 @@ public class GameManager : MonoBehaviour
     public EnemySpawnManager enemySpawnManager;
     public EnemyHealth enemyHealth;
     public PlayerHealth playerHealth;
-    
+    public EnemyLeft enemyleft;
+   
     public float surviveTime = 0.0f;
-    public int enemiesKilled = 0;
+    public int enemiesLeft;
     public int spawnedEnemies;
 
     public static GameManager Instance
@@ -32,22 +34,26 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        enemySpawnManager.enemySpawn();
+        enemiesLeft = enemyleft.enemycount;
     }
 
     void Update()
     {
         enemyDie();
         playerDie();
+        enemiesLeft = enemyleft.enemycount;
     }
 
     public bool enemyDie()
     {
+        enemyHealth = new EnemyHealth();
+        enemySpawnManager = new EnemySpawnManager();
         if (enemyHealth.EnemyCurHP <= 0)
         {
-            enemiesKilled += 1;
+            
             gameObject.SetActive(false);
-            enemySpawnManager.enemySpawn();
+            enemySpawnManager.CreateEnemy();
+            enemyleft.enemykilled();
         }
         return true;
     }
@@ -61,9 +67,9 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
-    public void survivalTime() 
-    { 
-
+    public void EneGame()
+    {
+        Debug.Log("GAME OVER");
     }
 
 }

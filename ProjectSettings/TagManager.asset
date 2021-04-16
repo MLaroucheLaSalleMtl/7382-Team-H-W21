@@ -5,11 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - BodyPart
   - Combat
   - EnemyWeapon
   - PlayerWeapon
   - SpawnPoint
+  - Impact
+  - Die
+  - enemyleft
+  - Open
   layers:
   - Default
   - TransparentFX

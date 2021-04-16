@@ -12,8 +12,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
-        //positionRaycast();
+        //positionRaycast(spawnPoint);
     }
 
     private void Update()
@@ -24,36 +23,16 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     public bool positionRaycast(GameObject spawnPoint)
     {
-
-        bool findObject = false;
-        float maxDistance = Vector3.Distance(transform.position, spawnPoint.transform.position);
-        //start from the character, and going to the direction of the spawn point
-        //Vector3.Distance();
-        Vector3 direction = spawnPoint.transform.position - transform.position;
-        Ray ray = new Ray(transform.position, direction);
-        if (Physics.Raycast(ray, maxDistance))
+        var ray = new Ray(transform.position, spawnPoint.transform.position - transform.position);
+        if (Physics.Raycast(ray, out var hit, 500))
         {
-            findObject = true;
-            Debug.DrawRay(ray.origin, hit.point);
-            enemySpawn.enemySpawn();
+            if (hit.transform.gameObject.tag != "SpawnPoint" && hit.transform.gameObject.tag != "Player")
+            {
+                return true;
+            }
         }
-        return findObject;
+        return false;
     }
 
-    //public void callEnemySpawn()
-    //{
-    //    StartCoroutine(enemySpawn());
-    //}
-
-    //IEnumerator enemySpawn()
-    //{
-    //    while (enemyCount < 10)
-    //    {
-    //        x = Random.Range(511, 517);
-    //        z = Random.Range(446, 452);
-    //        Instantiate(enemy, new Vector3(x, 65, z), Quaternion.identity);
-    //        yield return new WaitForSeconds(0.1f);
-    //        enemyCount += 1;
-    //    }
-    //}
+    
 }

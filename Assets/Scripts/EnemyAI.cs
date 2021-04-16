@@ -32,13 +32,13 @@ public class EnemyAI : MonoBehaviour
         {
             nav.updatePosition = true;
             nav.SetDestination(target.position);
-            //anim.SetBool("Run", true);
+            anim.SetBool("Run", true);
             anim.SetBool("Attack1", false);
         }
         else
         {
             nav.updatePosition = false;
-            //anim.SetBool("Run", false);
+            anim.SetBool("Run", false);
             anim.SetBool("Attack1", true);
         }
     }

@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityStandardAssets.CrossPlatformInput;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
@@ -10,18 +7,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
     [RequireComponent(typeof (ThirdPersonCharacter))]
     public class ThirdPersonUserControl : MonoBehaviour
     {
+        public Collider mLeftFoodCollider, mRightFoodCollider, mLeftHandCollider, mRightHandCollider;
         private ThirdPersonCharacter m_Character; // A reference to the ThirdPersonCharacter on the object
         private Transform m_Cam;                  // A reference to the main camera in the scenes transform
         private Vector3 m_CamForward;             // The current forward direction of the camera
         private Vector3 m_Move;
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
-        public Animator animator;
-        List<string> animlist = new List<string>(new string[] { "Attack1", "Attack2", "Attack3", "Attack4" });
-        public int ComboNumber;
-        public float Reset;
-        public float ResetTime;
-        
-        
+        public static ThirdPersonUserControl instance;
+        public void Awake()
+        {
+            instance = this;
+            SetColliderActive(false);
+        }
         private void Start()
         {
             // get the transform of the main camera
@@ -46,31 +43,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (!m_Jump)
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
-            }
-
-            if(Input.GetButtonDown("Fire1") && ComboNumber < 4)
-            {
-                animator.SetTrigger(animlist[ComboNumber]);
-                ComboNumber++;
-                Reset = 0f;
-            }
-            if(ComboNumber > 0)
-            {
-                Reset += Time.deltaTime;
-                if(Reset > ResetTime)
-                {
-                    animator.SetTrigger("Reset");
-                    ComboNumber = 0;
-                }
-            }
-            if(ComboNumber == 4)
-            {
-                ResetTime = 4f;
-                ComboNumber = 0;
-            }
-            else
-            {
-                ResetTime = 1f;
             }
         }
 
@@ -105,10 +77,24 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             m_Jump = false;
         }
 
-       
-
-        
-
-        
+        public void SetColliderActive(bool rActive)
+        {
+            if (mLeftFoodCollider != null)
+            {
+                mLeftFoodCollider.enabled = rActive;
+            }
+            if (mRightFoodCollider != null)
+            {
+                mRightFoodCollider.enabled = rActive;
+            }
+            if (mLeftHandCollider != null)
+            {
+                mLeftHandCollider.enabled = rActive;
+            }
+            if (mRightHandCollider != null)
+            {
+                mRightHandCollider.enabled = rActive;
+            }
+        }
     }
 }
