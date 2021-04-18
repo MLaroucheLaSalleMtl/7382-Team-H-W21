@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
         if (IsDead) { return; }//if the enemy is dead, ignore the code below
         if (isAttacking == false)
         {
-            Debug.Log("Reduce");
+            
             Hp -= 20;
             if (Hp < 0) { Hp = 0; }
             mSlider.value = Hp / 1.0f / MaxHp;//put values calculated above into the slider
@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
                 mDeadTick = 0;
                 mAnimator.SetTrigger("die");
                 mSlider.gameObject.SetActive(false);
-                Debug.Log("is dead");
+               
                 
                 GetComponent<EnemyAI>().enabled = false;
                 GetComponent<Collider>().enabled = false;

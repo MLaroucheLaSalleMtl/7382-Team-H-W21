@@ -12,7 +12,6 @@ TagManager:
   - Impact
   - Die
   - enemyleft
-  - Open
   layers:
   - Default
   - TransparentFX

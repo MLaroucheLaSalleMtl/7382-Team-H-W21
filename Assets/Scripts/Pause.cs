@@ -10,6 +10,7 @@ public class Pause : MonoBehaviour
     public GameObject PauseUI;
     public GameObject defeat;
     public GameObject Complete;
+    public MouseCursorInvisible Mouseinvisible;
 
     public void Update()
     {
@@ -29,6 +30,7 @@ public class Pause : MonoBehaviour
 
     public void PauseGame()
     {
+        Mouseinvisible.MouseUnlocked();
         PauseUI.SetActive(true);
         Time.timeScale = 0;
         GameIsPaused = true;
@@ -36,6 +38,7 @@ public class Pause : MonoBehaviour
 
     public void ResumeGame()
     {
+        Mouseinvisible.MouseLocked();
         PauseUI.SetActive(false);
         Time.timeScale = 1;
         GameIsPaused = false;
@@ -44,11 +47,12 @@ public class Pause : MonoBehaviour
     public void ExitGame() // If click Exit button, Game application will be exit
     {
         Application.Quit();
-        Debug.Log("Exit");
+        
     }
 
     public void BacktoMainmenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
     }
 
@@ -61,6 +65,7 @@ public class Pause : MonoBehaviour
 
     public void Defeat()
     {
+        Mouseinvisible.MouseUnlocked();
         Time.timeScale = 0;
         defeat.SetActive(true);
         
@@ -68,6 +73,7 @@ public class Pause : MonoBehaviour
 
     public void Completed()
     {
+        Mouseinvisible.MouseUnlocked();
         Time.timeScale = 0;
         Complete.SetActive(true);
     }

@@ -14,12 +14,15 @@ public class EnemySpawnManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        
     }
 
-
-    //Start is called before the first frame update
+    // Start is called before the first frame update
     void Start()
     {
+       
+
+
         for (int i = 0; i < 6; i++)// in total of six, this is for starting the game
         {
             if (player.positionRaycast(spawnPoints[i]))// player can't see the spawn point 

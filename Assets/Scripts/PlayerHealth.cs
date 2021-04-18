@@ -84,7 +84,7 @@ public class PlayerHealth : MonoBehaviour
         {            
             IsDead = true;
             mAnimator.SetBool("die", true);
-            Debug.Log(gameObject.name);
+            
             death = true;
             
             defeated.Defeat();

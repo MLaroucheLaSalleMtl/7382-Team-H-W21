@@ -67,9 +67,6 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
-    public void EneGame()
-    {
-        Debug.Log("GAME OVER");
-    }
+
 
 }

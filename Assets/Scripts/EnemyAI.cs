@@ -41,7 +41,5 @@ public class EnemyAI : MonoBehaviour
             anim.SetBool("Run", false);
             anim.SetBool("Attack1", true);
         }
-    }
-
-    
+    } 
 }

@@ -25,7 +25,6 @@ public class AttackControl : MonoBehaviour
             {
                 if (colliders[i].gameObject.tag == "Enemy")//when colliders on players limb touch object "enemy",go to method ReduceHP in enemy.cs
                 {
-                    Debug.Log(gameObject.name + " " + colliders[i].gameObject.name);//console check
                     var enemy = colliders[i].gameObject.GetComponent<Enemy>();
                     if (enemy)
                     {

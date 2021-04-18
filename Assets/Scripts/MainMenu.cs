@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
     public void ExitGame() // If click Exit button, Game application will be exit
     {
         Application.Quit();
-        Debug.Log("Exit");
+        
     }
 
 }
